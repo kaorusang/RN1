@@ -3,6 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
+'use strict';
 
 import React, { Component } from 'react';
 import {
@@ -13,15 +14,25 @@ import {
   Text,
   View
 } from 'react-native';
-import details from './details.ios';
 
-class Home extends Component {
+import details from './details.ios';
+import List from './components/listview';
+import data from './utils/data';
+
+export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
           id: 1,
           user: null,
+          data: data.MsgResult,
         };
+    }
+    componentDidMount() {
+      const self = this;
+      //console.log(self.state.data);
+      //this.fetchData();
+
     }
     _pressButton() {
         let _this = this;
@@ -72,17 +83,20 @@ class Home extends Component {
                   <View style={styles.icon_back}></View>
                 </TouchableOpacity>
                 <View style={styles.header_text_view}>
-                  <Text style={styles.header_text}>首页</Text>
+                  <Text style={styles.header_text}>demo</Text>
                 </View>
                 <TouchableOpacity style={styles.btn_right}>
                   <Text style={styles.btn_text}>123</Text>
                 </TouchableOpacity>
               </View>
+              { false ?
               <View style={styles.content}>
                 <TouchableOpacity onPress={this._pressButton.bind(this)}>
                     <Text>点我跳转{this.state.id}</Text>
                 </TouchableOpacity>
-              </View>
+              </View>:null
+              }
+              <List />
             </View>
         )
       }
@@ -91,13 +105,10 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop:10,
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
-    backgroundColor: '#F5FCFF',
-    shadowColor: '#000000',
-		shadowOpacity: 0.5
+    justifyContent: 'flex-start',
+    //backgroundColor: '#F5FCFF',
   },
   header: {
     paddingTop: 20,
@@ -105,6 +116,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     height:64,
     backgroundColor: '#099fde',
+    shadowColor: '#000000',
+		shadowOpacity: 0.5,
+    shadowOffset:  {width:0, height:2},
+    shadowRadius: 5,
   },
   btn_left: {
     height:44,
@@ -156,5 +171,3 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
-
-module.exports = Home;

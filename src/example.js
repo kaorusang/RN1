@@ -9,10 +9,9 @@ import {
   View
 } from 'react-native';
 
-//var Detail = require('./details.ios');
-var home = require('./home');
+import home from './home';
 
-class RN1 extends Component {
+export default class RN1 extends Component {
   render() {
       let defaultName = 'FirstPageComponent';
       let defaultComponent = home;
