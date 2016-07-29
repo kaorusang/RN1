@@ -19,7 +19,7 @@ export default class RN1 extends Component {
       <Navigator
         initialRoute={{ name: defaultName, component: defaultComponent }}
         configureScene={(route) => {
-          return Navigator.SceneConfigs.VerticalUpSwipeJump;
+          return Navigator.SceneConfigs.PushFromRight;
         }}
         renderScene={(route, navigator) => {
           let Component = route.component;

@@ -12,12 +12,15 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Platform
 } from 'react-native';
 
 import details from './details.ios';
 import List from './components/listview';
 import data from './utils/data';
+
+var isIOS = Platform.OS == 'ios';
 
 export default class Home extends Component {
     constructor(props) {
@@ -56,6 +59,8 @@ export default class Home extends Component {
         }
     }
     render() {
+      const { navigator } = this.props;
+      //console.log(navigator);
       if(this.state.user){
         return(
             <View style={styles.container}>
@@ -96,7 +101,7 @@ export default class Home extends Component {
                 </TouchableOpacity>
               </View>:null
               }
-              <List />
+              <List navigator={navigator}/>
             </View>
         )
       }
@@ -111,10 +116,10 @@ const styles = StyleSheet.create({
     //backgroundColor: '#F5FCFF',
   },
   header: {
-    paddingTop: 20,
+    paddingTop: isIOS ? 20 : 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height:64,
+    height: isIOS ? 64 : 44,
     backgroundColor: '#099fde',
     shadowColor: '#000000',
 		shadowOpacity: 0.5,

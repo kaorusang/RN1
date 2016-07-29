@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 
 import Listitem from './listitem';
-import data from '../utils/data';
+import data from '../utils/data1';
 
 const {
   width,
@@ -21,29 +21,31 @@ const {
 } = Dimensions.get('window');
 
 export default class Listview extends Component {
+
+
   constructor(props) {
       super(props);
+      //console.log(data.MsgResult);
       this.state = {
         dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2,}).cloneWithRows(data.MsgResult),
       }
   }
   componentDidMount() {
-    //const self = this;
-    //console.log(this.state.data);
-    //console.log(self.state.data[0].MsgId);
-    //this.fetchData();
+
   }
   render() {
+
+    //console.log(navigator);
     return (
       <ListView
-        contentContainerStyle={styles.content}
-        //style={styles.content}
+        //contentContainerStyle={styles.content}
+        style={styles.content}
         dataSource={this.state.dataSource}
-        renderRow={this.renderRow}
+        renderRow={this.renderRow.bind(this)}
         //renderRow={this.renderRow.bind(this)}
-        initialListSize={20}
-        pageSize={4} // should be a multiple of the no. of visible cells per row
-        scrollRenderAheadDistance={500}
+        initialListSize={0}
+        pageSize={1} // should be a multiple of the no. of visible cells per row
+        scrollRenderAheadDistance={200}
         renderScrollComponent={props=><ScrollView {...props} />}
         //renderRow={(rowData) => <View><Text>321</Text></View>}
       />
@@ -60,10 +62,14 @@ export default class Listview extends Component {
   // }
 
   renderRow(data, section, index) {
+    const { navigator } = this.props;
+    //console.log(data)
+    //console.log(navigator);
     //console.log(this.state.data);
     //console.log(data.MsgResult);
+    //console.log(navigator);
     return (
-        <Listitem propsData={data} propsDection={section} propsIndex={index} />
+        <Listitem navigator={navigator} propsData={data} propsDection={section} propsIndex={index} />
     )
   }
   // _renderRow1 = () =>{
