@@ -17,7 +17,13 @@ import {
 } from 'react-native';
 
 import details from './details.ios';
+
+import BlueHeader from './components/header';
 import List from './components/listview';
+
+import alertBox from './pages/alertBox';
+import whiteHeader from './pages/whiteHeader';
+
 import data from './utils/data';
 
 var isIOS = Platform.OS == 'ios';
@@ -40,6 +46,7 @@ export default class Home extends Component {
     _pressButton() {
         let _this = this;
         const { navigator } = this.props;
+
         //为什么这里可以取得 props.navigator?请看上文:
         //<Component {...route.params} navigator={navigator} />
         //这里传递了navigator作为props
@@ -60,21 +67,16 @@ export default class Home extends Component {
     }
     render() {
       const { navigator } = this.props;
-      //console.log(navigator);
+      let title = "首页";
+      let listPage = [];
+      listPage.push(alertBox);
+      listPage.push(whiteHeader);
+      listPage.push(whiteHeader);
+
       if(this.state.user){
         return(
             <View style={styles.container}>
-              <View style={styles.header}>
-                <TouchableOpacity style={styles.btn_left}>
-                  <View style={styles.icon_back}></View>
-                </TouchableOpacity>
-                <View style={styles.header_text_view}>
-                  <Text style={styles.header_text}>首页</Text>
-                </View>
-                <TouchableOpacity style={styles.btn_right}>
-                  <Text style={styles.btn_text}>123</Text>
-                </TouchableOpacity>
-              </View>
+              <BlueHeader navigator={navigator} title={title}/>
               <View style={styles.content}>
                 <Text>{JSON.stringify(this.state.user)}</Text>
               </View>
@@ -83,25 +85,15 @@ export default class Home extends Component {
       }else{
         return (
             <View style={styles.container}>
-              <View style={styles.header}>
-                <TouchableOpacity style={styles.btn_left}>
-                  <View style={styles.icon_back}></View>
-                </TouchableOpacity>
-                <View style={styles.header_text_view}>
-                  <Text style={styles.header_text}>demo</Text>
-                </View>
-                <TouchableOpacity style={styles.btn_right}>
-                  <Text style={styles.btn_text}>123</Text>
-                </TouchableOpacity>
-              </View>
-              { false ?
+              <BlueHeader navigator={navigator} title={title}/>
+              { true ?
               <View style={styles.content}>
                 <TouchableOpacity onPress={this._pressButton.bind(this)}>
                     <Text>点我跳转{this.state.id}</Text>
                 </TouchableOpacity>
               </View>:null
               }
-              <List navigator={navigator}/>
+              <List navigator={navigator} list={listPage}/>
             </View>
         )
       }

@@ -15,25 +15,40 @@ import {
   Platform
 } from 'react-native';
 
-import BlueHeader from '../components/header';
-import data from '../utils/data1';
 var isIOS = Platform.OS == 'ios';
 
-export default class WhiteHeader extends Component {
+export default class BlueHeader extends Component {
   constructor(props) {
       super(props);
       this.state = {};
   }
-  render() {
+  _pressButton() {
       const { navigator } = this.props;
-      let title = data.MsgResult[1].ListName;
-      console.log(title);
+
+      if(navigator) {
+          //很熟悉吧，入栈出栈~ 把当前的页面pop掉，这里就返回到了上一个页面:FirstPageComponent了
+          navigator.jumpBack();
+      }
+  }
+  _pressButtonPop() {
+      const { navigator } = this.props;
+      if(navigator) {
+          navigator.pop();
+      }
+  }
+  render() {
+      const { title } = this.props;
       return (
-          <View style={styles.container}>
-            <BlueHeader navigator={navigator} title={title}/>
-            <View style={styles.content}>
-              <Text>whiteHeader</Text>
+          <View style={styles.header}>
+            <TouchableOpacity style={styles.btn_left} onPress={this._pressButtonPop.bind(this)}>
+              <View style={styles.icon_back}></View>
+            </TouchableOpacity>
+            <View style={styles.header_text_view}>
+              <Text style={styles.header_text}>{title}</Text>
             </View>
+            <TouchableOpacity style={styles.btn_right}>
+              <Text style={styles.btn_text}>222</Text>
+            </TouchableOpacity>
           </View>
     );
   }

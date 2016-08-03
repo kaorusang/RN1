@@ -14,6 +14,8 @@ import {
   View
 } from 'react-native';
 
+import BlueHeader from './components/header';
+
 const USER_MODELS = {
     1: { name: 'Sakamotomaaya', age: 36 },
     2: { name: 'Kaoru', age: 32 }
@@ -36,26 +38,13 @@ class Detail extends Component {
           navigator.jumpBack();
       }
   }
-  _pressButtonPop() {
-      const { navigator } = this.props;
-      if(navigator) {
-          navigator.pop();
-      }
-  }
+
   render() {
+      let title = "详细页";
       return (
           <View style={styles.container}>
-            <View style={styles.header}>
-              <TouchableOpacity style={styles.btn_left} onPress={this._pressButtonPop.bind(this)}>
-                <View style={styles.icon_back}></View>
-              </TouchableOpacity>
-              <View style={styles.header_text_view}>
-                <Text style={styles.header_text}>详情页</Text>
-              </View>
-              <TouchableOpacity style={styles.btn_right}>
-                <Text style={styles.btn_text}>222</Text>
-              </TouchableOpacity>
-            </View>
+
+            <BlueHeader navigator={navigator} title={title}/>
             <View style={styles.content}>
               <Text>获得的参数: id={ this.props.id }</Text>
               <TouchableOpacity onPress={this._pressButton.bind(this)}>

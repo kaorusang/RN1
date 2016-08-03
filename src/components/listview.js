@@ -62,14 +62,15 @@ export default class Listview extends Component {
   // }
 
   renderRow(data, section, index) {
-    const { navigator } = this.props;
+    const { navigator , list } = this.props;
+    //console.log(list);
     //console.log(data)
     //console.log(navigator);
     //console.log(this.state.data);
     //console.log(data.MsgResult);
     //console.log(navigator);
     return (
-        <Listitem navigator={navigator} propsData={data} propsDection={section} propsIndex={index} />
+        <Listitem navigator={navigator} propsData={data} propsDection={section} propsIndex={index} list={list} />
     )
   }
   // _renderRow1 = () =>{

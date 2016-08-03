@@ -11,9 +11,6 @@ import {
   PixelRatio
 } from 'react-native';
 
-import alertBox from '../pages/alertBox';
-import whiteHeader from '../pages/whiteHeader';
-
 export default class Listitem extends Component {
   constructor(props) {
       super(props);
@@ -24,12 +21,7 @@ export default class Listitem extends Component {
   componentDidMount() {
   }
   _gotoDetailPage() {
-      const { navigator, propsIndex} = this.props;
-
-      let list = [];
-      list.push(alertBox);
-      list.push(whiteHeader);
-      list.push(whiteHeader);
+      const { navigator, propsIndex, list} = this.props;
 
       if(navigator) {
           navigator.push({
