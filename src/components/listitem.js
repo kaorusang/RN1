@@ -37,6 +37,8 @@ export default class Listitem extends Component {
       //let _data  = this.props.propsData;
       //console.log(this.props.propsData);
       //console.log(this.props.propsDection, this.props.propsIndex);
+      const {propsData, propsIndex, list} = this.props;
+      //console.log(propsIndex);
 
 
       return (
@@ -46,7 +48,7 @@ export default class Listitem extends Component {
           onPress={this._gotoDetailPage.bind(this)}
         >
           <View style={styles.listItem}>
-            <Text style={styles.listItemText}>{this.props.propsData.ListName}</Text>
+            <Text style={styles.listItemText}>{this.props.propsData.data.ListName}</Text>
           </View>
         </TouchableHighlight>
       )

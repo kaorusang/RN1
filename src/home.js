@@ -24,7 +24,7 @@ import List from './components/listview';
 import alertBox from './pages/alertBox';
 import whiteHeader from './pages/whiteHeader';
 
-import data from './utils/data';
+import data from './utils/data1';
 
 var isIOS = Platform.OS == 'ios';
 
@@ -86,14 +86,14 @@ export default class Home extends Component {
         return (
             <View style={styles.container}>
               <BlueHeader navigator={navigator} title={title}/>
-              { true ?
+              { false ?
               <View style={styles.content}>
                 <TouchableOpacity onPress={this._pressButton.bind(this)}>
                     <Text>点我跳转{this.state.id}</Text>
                 </TouchableOpacity>
               </View>:null
               }
-              <List navigator={navigator} list={listPage}/>
+              <List navigator={navigator} list={listPage} data={data}/>
             </View>
         )
       }

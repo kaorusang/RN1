@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 
 import Listitem from './listitem';
-import data from '../utils/data1';
+import ListHeader from './listHeader';
 
 const {
   width,
@@ -25,77 +25,111 @@ export default class Listview extends Component {
 
   constructor(props) {
       super(props);
-      //console.log(data.MsgResult);
-      this.state = {
-        dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2,}).cloneWithRows(data.MsgResult),
+
+      const { data } = this.props;
+      let data1 = data.MsgResult;
+      //console.log(data1);
+
+      var getSectionData = (dataBlob, sectionID) => {
+        return dataBlob[sectionID];
+      };
+      var getRowData = (dataBlob, sectionID, rowID) => {
+        return dataBlob[rowID];
+      };
+
+      var NUM_SECTIONS = data1.length;
+      //console.log(getRowData);
+      var NUM_ROWS_PER_SECTION = data1.length;
+
+      
+      var dataBlob = {};
+      var sectionIDs = [];
+      var rowIDs = [];
+      for (var ii = 0; ii < NUM_SECTIONS; ii++) {
+        //var sectionName = 'Section ' + ii;
+        var sectionName = ii;
+        sectionIDs.push(sectionName);
+        //dataBlob[sectionName] = sectionName;
+        dataBlob[sectionName] = data1[ii].data.ListName;
+        rowIDs[ii] = [];
+
+        console.log(dataBlob[2]);
+
+        for (var jj = 0; jj < NUM_ROWS_PER_SECTION; jj++) {
+          //var rowName = 'S' + ii + ', R' + jj;
+          var index = jj;
+          rowIDs[ii].push(index);
+          //dataBlob[rowName] = rowName;
+          dataBlob[index] = data1[jj];
+
+          console.log(dataBlob[1]);
+        }
       }
+
+      //console.log(dataBlob)
+
+      var dataSource = new ListView.DataSource({
+        getRowData: getRowData,
+        getSectionHeaderData: getSectionData,
+        rowHasChanged: (r1, r2) => r1 !== r2,
+        sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
+      });
+
+
+      this.state = {
+        //使用section
+        dataSource: dataSource.cloneWithRowsAndSections(dataBlob, sectionIDs, rowIDs),
+        //不使用section
+        //dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2,}).cloneWithRows(data.MsgResult),
+      }
+      
+
+
   }
   componentDidMount() {
 
   }
+
   render() {
 
-    //console.log(navigator);
     return (
       <ListView
         //contentContainerStyle={styles.content}
         style={styles.content}
         dataSource={this.state.dataSource}
+        //renderRow={(rowData) => <View><Text>321</Text></View>}
         renderRow={this.renderRow.bind(this)}
-        //renderRow={this.renderRow.bind(this)}
+        //renderHeader={this.renderHeader.bind(this)}
+        //renderFooter={this.renderHeader.bind(this)}
+        renderSectionHeader={this.renderSectionHeader.bind(this)}
         initialListSize={0}
         pageSize={1} // should be a multiple of the no. of visible cells per row
         scrollRenderAheadDistance={200}
         renderScrollComponent={props=><ScrollView {...props} />}
-        //renderRow={(rowData) => <View><Text>321</Text></View>}
+
       />
     );
   }
 
-  // _genRows(pressData: {[key: number]: boolean}): Array<string> {
-  //   var dataBlob = [];
-  //   for (var ii = 0; ii < 100; ii++) {
-  //     var pressedText = pressData[ii] ? ' (pressed)' : '';
-  //     dataBlob.push('Row ' + ii + pressedText);
-  //   }
-  //   return dataBlob;
-  // }
+  renderSectionHeader(sectionData, index){
+    //console.log(sectionData);
+    return(
+      <ListHeader propsData={sectionData}/>
+    )
+  }
 
   renderRow(data, section, index) {
     const { navigator , list } = this.props;
-    //console.log(list);
+
     //console.log(data)
-    //console.log(navigator);
-    //console.log(this.state.data);
-    //console.log(data.MsgResult);
-    //console.log(navigator);
+
+    //console.log(index)
+
     return (
-        <Listitem navigator={navigator} propsData={data} propsDection={section} propsIndex={index} list={list} />
+        <Listitem navigator={navigator} propsData={data} propsDection={section} propsIndex={index} list={list}  />
     )
   }
-  // _renderRow1 = () =>{
-  //   return (
-  //     <View>
-  //       <Text>123</Text>
-  //     </View>
-  //   );
-  // }
-  // _renderRow = (rowData: string, sectionID: number, rowID: number) => {
-  //   var rowHash = Math.abs(hashCode(rowData));
-  //   var imgSource = THUMB_URLS[rowHash % THUMB_URLS.length];
-  //   return (
-  //     <TouchableHighlight onPress={() => this._pressRow(rowID)} underlayColor="transparent">
-  //       <View>
-  //         <View style={styles.row}>
-  //           <Image style={styles.thumb} source={imgSource} />
-  //           <Text style={styles.text}>
-  //             {rowData}
-  //           </Text>
-  //         </View>
-  //       </View>
-  //     </TouchableHighlight>
-  //   );
-  // }
+
 }
 
 var styles = StyleSheet.create({

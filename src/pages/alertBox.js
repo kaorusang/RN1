@@ -26,7 +26,7 @@ export default class AlertBox extends Component {
   }
   render() {
       const { navigator } = this.props;
-      let title = data.MsgResult[0].ListName;
+      let title = data.MsgResult[0].data.ListName;
       console.log(title);
       return (
           <View style={styles.container}>

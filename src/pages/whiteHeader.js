@@ -26,7 +26,7 @@ export default class WhiteHeader extends Component {
   }
   render() {
       const { navigator } = this.props;
-      let title = data.MsgResult[1].ListName;
+      let title = data.MsgResult[1].data.ListName;
       console.log(title);
       return (
           <View style={styles.container}>
