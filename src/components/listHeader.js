@@ -22,7 +22,7 @@ export default class ListHeader extends Component {
 
   render() {
       const { propsData } = this.props;
-      //console.log(propsData);
+      console.log(propsData);
       return (
         <View>
           { propsData ?

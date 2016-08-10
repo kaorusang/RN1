@@ -39,7 +39,7 @@ export default class Listview extends Component {
 
       var NUM_SECTIONS = data1.length;
       //console.log(getRowData);
-      var NUM_ROWS_PER_SECTION = data1.length;
+      var NUM_ROWS_PER_SECTION = 3;
 
       
       var dataBlob = {};
@@ -53,7 +53,7 @@ export default class Listview extends Component {
         dataBlob[sectionName] = data1[ii].data.ListName;
         rowIDs[ii] = [];
 
-        console.log(dataBlob[2]);
+        //console.log(dataBlob);
 
         for (var jj = 0; jj < NUM_ROWS_PER_SECTION; jj++) {
           //var rowName = 'S' + ii + ', R' + jj;
@@ -61,8 +61,9 @@ export default class Listview extends Component {
           rowIDs[ii].push(index);
           //dataBlob[rowName] = rowName;
           dataBlob[index] = data1[jj];
+          //dataBlob[index] = data1[ii];
 
-          console.log(dataBlob[1]);
+          //console.log(dataBlob);
         }
       }
 
@@ -78,8 +79,9 @@ export default class Listview extends Component {
 
       this.state = {
         //使用section
-        dataSource: dataSource.cloneWithRowsAndSections(dataBlob, sectionIDs, rowIDs),
+        //dataSource: dataSource.cloneWithRowsAndSections(data.MsgResult, sectionIDs, rowIDs),
         //不使用section
+        dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2,}).cloneWithRows(data.MsgResult),
         //dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2,}).cloneWithRows(data.MsgResult),
       }
       
@@ -112,11 +114,35 @@ export default class Listview extends Component {
   }
 
   renderSectionHeader(sectionData, index){
-    //console.log(sectionData);
+    console.log(sectionData)
+    if(index == 's1'){
+      var i = 0;
+    } else if (index == 's2'){
+      var i = 1;
+    } else if (index == 's3'){
+      var i = 2;
+    }
     return(
-      <ListHeader propsData={sectionData}/>
+      <ListHeader propsData={sectionData[i]}/>
     )
   }
+
+  // 有section
+  // renderSectionHeader(sectionData, index){
+  //   console.log(sectionData)
+  //   if(index == 's1'){
+  //     var i = 0;
+  //   } else if (index == 's2'){
+  //     var i = 1;
+  //   } else if (index == 's3'){
+  //     var i = 2;
+  //   }
+  //   return(
+  //     <ListHeader propsData={sectionData}/>
+  //   )
+  // }
+
+
 
   renderRow(data, section, index) {
     const { navigator , list } = this.props;
