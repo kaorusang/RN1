@@ -21,18 +21,18 @@ export default class ListHeader extends Component {
   }
 
   render() {
-      const { propsData } = this.props;
-      console.log(propsData);
+      const { propsData, propsSectionId } = this.props;
+      console.log(propsSectionId);
       return (
         <View>
-          { propsData ?
+          {propsSectionId !== 's1' ? propsSectionId ?
           <TouchableHighlight style={styles.ListHeader}>
             <View>
               <Text style={styles.text}>
-                {this.props.propsData.SectionName}
+                {propsSectionId}
               </Text>
             </View>
-          </TouchableHighlight> : null
+          </TouchableHighlight> : null :null
           }
         </View>
       )

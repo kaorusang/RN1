@@ -21,12 +21,12 @@ export default class Listitem extends Component {
   componentDidMount() {
   }
   _gotoDetailPage() {
-      const { navigator, propsIndex, list} = this.props;
-
+      const { navigator, propsData} = this.props;
+      //console.log(propsData.goto)
       if(navigator) {
           navigator.push({
               name: 'ComponentPage01',
-              component: list[propsIndex],
+              component: propsData.goto,
               params: {
                 id: 1,
               }
@@ -48,7 +48,7 @@ export default class Listitem extends Component {
           onPress={this._gotoDetailPage.bind(this)}
         >
           <View style={styles.listItem}>
-            <Text style={styles.listItemText}>{this.props.propsData.data.ListName}</Text>
+            <Text style={styles.listItemText}>{this.props.propsData.name}</Text>
           </View>
         </TouchableHighlight>
       )

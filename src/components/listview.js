@@ -27,61 +27,23 @@ export default class Listview extends Component {
       super(props);
 
       const { data } = this.props;
-      let data1 = data.MsgResult;
-      //console.log(data1);
 
-      var getSectionData = (dataBlob, sectionID) => {
-        return dataBlob[sectionID];
-      };
-      var getRowData = (dataBlob, sectionID, rowID) => {
-        return dataBlob[rowID];
-      };
-
-      var NUM_SECTIONS = data1.length;
-      //console.log(getRowData);
-      var NUM_ROWS_PER_SECTION = 3;
-
+      let dataBlob = data;
       
-      var dataBlob = {};
-      var sectionIDs = [];
-      var rowIDs = [];
-      for (var ii = 0; ii < NUM_SECTIONS; ii++) {
-        //var sectionName = 'Section ' + ii;
-        var sectionName = ii;
-        sectionIDs.push(sectionName);
-        //dataBlob[sectionName] = sectionName;
-        dataBlob[sectionName] = data1[ii].data.ListName;
-        rowIDs[ii] = [];
-
-        //console.log(dataBlob);
-
-        for (var jj = 0; jj < NUM_ROWS_PER_SECTION; jj++) {
-          //var rowName = 'S' + ii + ', R' + jj;
-          var index = jj;
-          rowIDs[ii].push(index);
-          //dataBlob[rowName] = rowName;
-          dataBlob[index] = data1[jj];
-          //dataBlob[index] = data1[ii];
-
-          //console.log(dataBlob);
-        }
-      }
-
-      //console.log(dataBlob)
-
       var dataSource = new ListView.DataSource({
-        getRowData: getRowData,
-        getSectionHeaderData: getSectionData,
         rowHasChanged: (r1, r2) => r1 !== r2,
         sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
       });
 
+      //console.log(dataBlob, sectionIDs, rowIDs);
+
+      //console.log(dataBlob)
 
       this.state = {
         //使用section
-        //dataSource: dataSource.cloneWithRowsAndSections(data.MsgResult, sectionIDs, rowIDs),
+        dataSource: dataSource.cloneWithRowsAndSections(dataBlob),
         //不使用section
-        dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2,}).cloneWithRows(data.MsgResult),
+        //dataSource: dataSource.cloneWithRows(dataBlob.section1),
         //dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2,}).cloneWithRows(data.MsgResult),
       }
       
@@ -113,46 +75,20 @@ export default class Listview extends Component {
     );
   }
 
-  renderSectionHeader(sectionData, index){
-    console.log(sectionData)
-    if(index == 's1'){
-      var i = 0;
-    } else if (index == 's2'){
-      var i = 1;
-    } else if (index == 's3'){
-      var i = 2;
-    }
+  
+  renderSectionHeader(sectionData, sectionId){
     return(
-      <ListHeader propsData={sectionData[i]}/>
+      <ListHeader propsData={sectionData} propsSectionId={sectionId}/>
     )
   }
 
-  // 有section
-  // renderSectionHeader(sectionData, index){
-  //   console.log(sectionData)
-  //   if(index == 's1'){
-  //     var i = 0;
-  //   } else if (index == 's2'){
-  //     var i = 1;
-  //   } else if (index == 's3'){
-  //     var i = 2;
-  //   }
-  //   return(
-  //     <ListHeader propsData={sectionData}/>
-  //   )
-  // }
 
 
-
-  renderRow(data, section, index) {
-    const { navigator , list } = this.props;
-
-    //console.log(data)
-
-    //console.log(index)
-
+  renderRow(data: string, section: number, index: number) {
+    const { navigator } = this.props;
+    console.log(data)
     return (
-        <Listitem navigator={navigator} propsData={data} propsDection={section} propsIndex={index} list={list}  />
+        <Listitem navigator={navigator} propsData={data} />
     )
   }
 

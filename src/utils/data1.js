@@ -1,42 +1,24 @@
+//'use strict';
+
+import alertBox from '../pages/alertBox';
+import whiteHeader from '../pages/whiteHeader';
+
+console.log(alertBox)
+
+
+
 export default data =
-// {
-//   "MsgResult": [
-//     {
-//       "SectionName": "section 01",
-//       "ListName": "alertBox",
-//     }, {
-//       "SectionName": "section 02",
-//       "ListName": "whiteHeader",
-//     }, {
-//       "SectionName": "section 03",
-//       "ListName": "whiteHeader",
-//     }
-//   ]
-
-// };
-
-
 {
-  "MsgResult": [
-    {
-      "SectionName" : "section 01",
-      "data" : {
-          //"ListName": ["alertBox", "alertBox1","alertBox2"]
-          "ListName": "alertBox",
-      }
+    section1:{
+      row1 : {'name' : "alertBox" , 'goto' : alertBox },
+      row2 : {'name' : "alertBox" , 'goto' : alertBox },
     },
-    {
-      "SectionName" : "section 02",
-      "data" : {
-          "ListName": "whiteHeader",
-      }
+    section2:{
+      row1 : {'name' : "alertBox" , 'goto' : alertBox },
+      row2 : {'name' : "whiteHeader" , 'goto' : whiteHeader },
     },
-    {
-      "SectionName" : "section 03",
-      "data" : {
-          "ListName": "whiteHeader",
-      }
+    section3:{
+      row1 : {'name' : "whiteHeader" , 'goto' : whiteHeader },
+      row2 : {'name' : "whiteHeader" , 'goto' : whiteHeader },
     },
-  ]
-
 };

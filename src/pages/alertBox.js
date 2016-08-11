@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 
 import BlueHeader from '../components/header';
-import data from '../utils/data1';
+//import data from '../utils/data1';
 var isIOS = Platform.OS == 'ios';
 
 export default class AlertBox extends Component {
@@ -26,8 +26,8 @@ export default class AlertBox extends Component {
   }
   render() {
       const { navigator } = this.props;
-      let title = data.MsgResult[0].data.ListName;
-      console.log(title);
+      let title = 'alerbox';
+      //console.log(title);
       return (
           <View style={styles.container}>
             <BlueHeader navigator={navigator} title={title}/>

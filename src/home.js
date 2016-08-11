@@ -24,8 +24,6 @@ import List from './components/listview';
 import alertBox from './pages/alertBox';
 import whiteHeader from './pages/whiteHeader';
 
-import data from './utils/data1';
-
 var isIOS = Platform.OS == 'ios';
 
 export default class Home extends Component {
@@ -34,7 +32,7 @@ export default class Home extends Component {
         this.state = {
           id: 1,
           user: null,
-          data: data.MsgResult,
+          //data: data.MsgResult,
         };
     }
     componentDidMount() {
@@ -67,11 +65,42 @@ export default class Home extends Component {
     }
     render() {
       const { navigator } = this.props;
+
       let title = "首页";
-      let listPage = [];
-      listPage.push(alertBox);
-      listPage.push(whiteHeader);
-      listPage.push(whiteHeader);
+      let data =
+      {
+          section1:{
+            row1 : {'name' : "alertBox" , 'goto' : alertBox, },
+            row2 : {'name' : "alertBox" , 'goto' : alertBox, },
+            row3 : {'name' : "alertBox" , 'goto' : alertBox, },
+            row4 : {'name' : "alertBox" , 'goto' : alertBox, },
+            row5 : {'name' : "alertBox" , 'goto' : alertBox, },
+          },
+          section2:{
+            row1 : {'name' : "alertBox" , 'goto' : alertBox, },
+            row2 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+            row3 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+            row4 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+            row5 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+            row6 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+            row7 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+            row8 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+            row9 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+            row10 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+          },
+          section3:{
+            row1 : {'name' : "alertBox" , 'goto' : alertBox, },
+            row2 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+            row3 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+            row4 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+            row5 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+            row6 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+            row7 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+            row8 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+            row9 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+            row10 : {'name' : "whiteHeader" , 'goto' : whiteHeader, },
+          },
+      };
 
       if(this.state.user){
         return(
@@ -93,7 +122,7 @@ export default class Home extends Component {
                 </TouchableOpacity>
               </View>:null
               }
-              <List navigator={navigator} list={listPage} data={data}/>
+              <List navigator={navigator} data={data}/>
             </View>
         )
       }
